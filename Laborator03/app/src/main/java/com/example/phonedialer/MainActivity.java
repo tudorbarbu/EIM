@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -135,6 +136,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 number.setText(number.getText().toString().substring(0, number.getText().toString().length() - 1));
+            }
+        });
+
+        findViewById(R.id.contact).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String phoneNumber = number.getText().toString();
+                if (phoneNumber.length() > 0) {
+                    Intent intent = new Intent("com.example.myapplication.intent.action.MainActivity");
+                    intent.putExtra("com.example.myapplication.PHONE_NUMBER_KEY", phoneNumber);
+                    startActivityForResult(intent, 4);
+                } else {
+                    Toast.makeText(getApplication(), "error <3", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
